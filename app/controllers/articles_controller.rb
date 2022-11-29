@@ -1,8 +1,7 @@
 class ArticlesController < ApplicationController
-  http_basic_authenticate_with name: "admin", password: "admin", except: [:index, :show]
 
   def index
-    @articles = Article.all
+    @articles = []
   end
 
   def show
@@ -10,12 +9,12 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    @article = current_user.article.new
   end
 
   def create
-    @article = Article.new(article_params)
-
+    @article = current_user.article.new(article_params)
+    @article.user = current_user
     if @article.save
       redirect_to @article
     else
@@ -24,7 +23,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
+    @article = current_user.articles.find(params[:id])
   end
 
   def update
