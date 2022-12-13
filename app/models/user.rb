@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
   
-  has_many :articles
+  has_many :articles, dependent: :destroy
 
   accepts_nested_attributes_for :articles
 end

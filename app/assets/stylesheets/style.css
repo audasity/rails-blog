@@ -1,21 +1,4 @@
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: rgb(253, 219, 174);
-  }
-.navbar li {
-    float: left;
-  }
-  
-.navbar li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 14px;
-    text-decoration: none;
-  }
+
 
 .notice { 
     display: none;
@@ -27,8 +10,4 @@
 
 .count {
     display: none;
-}
-
-.new-article:hover {
-    color:rgb(253, 219, 174);
 }

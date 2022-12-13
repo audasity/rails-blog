@@ -2,6 +2,8 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = current_user.articles
+    @all_articles = Article.all.select { |article| article.status == "public" }
+    @current_user = current_user.id
   end
 
   def show
@@ -10,6 +12,10 @@ class ArticlesController < ApplicationController
 
   def new
     @article = current_user.articles.build
+  end
+
+  def truncate(string, max)
+    string.length > max ? "#{string[0...max]}..." : string
   end
 
   def create

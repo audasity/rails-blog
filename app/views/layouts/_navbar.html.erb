@@ -1,5 +1,12 @@
-<nav class="navbar">
-    <ul>
-        <li><%= link_to "Home", root_path, class: "navbar-brand" %></li>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+    <div class="container-fluid">
+        <%= link_to "Home", root_path, class: "navbar-brand" %>
+        <!-- navbar elements -->
+        <ul class="navbar-nav ms-auto">
+            <% if user_signed_in?%>
+                    <%= button_to "Sign out", destroy_user_session_path, method: :delete, form: {turbolink: false}, class: "nav-link mx-2" %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
 </nav>
