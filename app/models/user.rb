@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :rememberable, :validatable
   
   has_many :articles
+
+  accepts_nested_attributes_for :articles
 end

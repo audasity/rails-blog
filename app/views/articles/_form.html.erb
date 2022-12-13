@@ -1,23 +1,44 @@
+<% if @article.errors.any? %>
+ <div class="row">
+  <div class="col-xs-8 col-xs-offset-2">
+   <div class="panel panel-danger">
+    <div class="panel-heading">
+     <h2 class="panel-title">
+      <%= pluralize(@article.errors.count, "error") %>
+      prohibited this article from being saved:
+     </h2>
+     <div class="panel-body">
+      <ul>
+       <% @article.errors.full_messages.each do |msg|%>
+        <li><%= msg %></li>
+       <% end %>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+<% end %>
+<!-- :model arugment binds formbulider to model object.
+     form scoped to article, form fields populated by values from article -->
 <%= form_with model: article do |form| %>
+  <!-- article[status] -->
   <div>
     <%= form.label :status %><br>
-    <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+    <!-- select sets default select option, in this case by default is "public" -->
+    <%= form.select :status, ['public', 'private'], selected: 'public' %>
   </div>
 
+  <!-- article[title] -->
   <div>
     <%= form.label :title %><br>
     <%= form.text_field :title %>
-    <% article.errors.full_messages_for(:title).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
   </div>
 
+  <!-- article[body] -->
   <div>
     <%= form.label :body %><br>
     <%= form.text_area :body %><br>
-    <% article.errors.full_messages_for(:body).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
   </div>
 
   <div>

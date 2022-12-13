@@ -1,32 +1,29 @@
 <!-- inside app/views/home/index.html.erb -->
-
-<% if user_signed_in? %> 
- <div> Welcome <%= current_user.email %> </div>
- <h1><%= link_to "Articles", root_path %></h1>
-
-    Our blog has <%= Article.public_count %> articles and counting!
-
-    <ul>
-    <% @articles.each do |article| %>
-        <% unless article.archived? %>
-        <li>
-            <%= link_to article.title, article %>
-        </li>
+<% if user_signed_in? %>
+  <div class="container">
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">name</th>
+          <th scope="col"><%= link_to "New Article", new_article_path, class: "navbar-brand new-article" %></th>
+          <th scope="col"><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-warning" %></th>
+        </tr>
+      <tbody>
+        <% @articles.each_with_index do |article, index| %>
+          <tr>
+            <th scope="row"><%= index+1 %></th>
+            <td><%= link_to article.title, article %></td>
+            <td><%= link_to "edit", edit_article_path(article)%></td>
+            <td><%= link_to "Destroy", article_path(article), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></td>
+          </tr>
         <% end %>
-    <% end %>
-    </ul>
-  <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+      </tbody>
+    </table>
+  </div>
 <% else %>
-  <%= button_to "Sign in", new_user_session_path %> 
+  <%= button_to "Sign in", new_user_session_path, class: "btn btn-warning" %> 
 <% end %>
-
-
-
-<button type="button" 
-        class="btn btn-lg btn-danger" 
-        data-bs-toggle="popover" 
-        title="Popover title" 
-        data-bs-content="Amazing content, right ?">
-        <%= link_to "New Article", new_article_path %>
-</button>  
-

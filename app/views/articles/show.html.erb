@@ -1,17 +1,18 @@
-<h1><%= @article.title %></h1>
+<h2 align="center">Title: <%= @article.title %></h2>
 
-<p><%= @article.body %></p>
-
-<ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-  <li><%= link_to "Destroy", article_path(@article), data: {
+<div class="well col-xs-8 col-xs-offset-2">
+ <h4 class="center"><strong>Description:</strong></h4>
+ <hr>
+ <%= @article.body %>
+<%= link_to "Edit", edit_article_path(@article) %>
+<%= link_to "Destroy", article_path(@article), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
+                  } %>
 
-<h2>Comments</h2>
+
+<h4>Comments</h2>
 <%= render @article.comments %>
 
-<h2>Add a comment:</h2>
+<h4>Add a comment:</h2>
 <%= render 'comments/form' %>
