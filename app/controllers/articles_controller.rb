@@ -1,13 +1,13 @@
 class ArticlesController < ApplicationController
+  before_action :public_articles, only: [:index, :show]
 
   def index
-    @articles = current_user.articles
-    @all_articles = Article.all.select { |article| article.status == "public" }
+    @current_user_articles = current_user.articles
     @current_user = current_user.id
   end
 
   def show
-    @article = current_user.articles.find(params[:id])
+    @article = @public_articles.find(params[:id])
   end
 
   def new
@@ -49,8 +49,11 @@ class ArticlesController < ApplicationController
   end
 
   private
-    def article_params
-      params.require(:article).permit(:title, :body, :status)
-    end
+  def article_params
+    params.require(:article).permit(:title, :body, :status)
+  end
 
+  def public_articles
+    @public_articles = Article.public_posts
+  end
 end

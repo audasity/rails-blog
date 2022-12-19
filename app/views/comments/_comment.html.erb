@@ -1,18 +1,26 @@
 <% unless comment.archived? %>
-  <p>
-    <strong>Commenter:</strong>
-    <%= comment.commenter %>
-  </p>
+  <div class="card-body">
+    <div class="d-flex flex-start align-items-center">
+      <div>
+        <h6 class="fw-bold text-primary mb-1"><%= comment.commenter %></h6>
+        <p class="text-muted small mb-0">
+          <%= comment.created_at.strftime("%d/%m/%Y %H:%M") %>
+        </p>
+      </div>
+    </div>
 
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.body %>
-  </p>
+    <p class="mt-3 mb-4 pb-2">
+      <%= comment.body %>
+    </p>
 
-  <p>
-    <%= link_to "Destroy Comment", [comment.article, comment], data: {
+
+    <% if current_user.id == @article.user_id %>
+      <div class="small d-flex justify-content-start">
+        <%= link_to "Delete Comment", [comment.article, comment], data: {
                   turbo_method: :delete,
                   turbo_confirm: "Are you sure?"
                 } %>
-  </p>
+      </div>
+    <% end %>  
+  </div>
 <% end %>
