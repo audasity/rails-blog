@@ -4,7 +4,7 @@
       <div>
         <h6 class="fw-bold text-primary mb-1"><%= comment.commenter %></h6>
         <p class="text-muted small mb-0">
-          <%= comment.created_at.strftime("%d/%m/%Y %H:%M") %>
+          <%= format_time(comment.created_at) %>
         </p>
       </div>
     </div>
@@ -14,7 +14,7 @@
     </p>
 
 
-    <% if current_user.id == @article.user_id %>
+    <% if current_user&.id == comment.article.user_id %>
       <div class="small d-flex justify-content-start">
         <%= link_to "Delete Comment", [comment.article, comment], data: {
                   turbo_method: :delete,

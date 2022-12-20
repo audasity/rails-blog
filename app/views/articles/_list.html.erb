@@ -1,0 +1,28 @@
+<div class="col-md-8">
+      <h3 class="pb-4 mb-4 mt-4 fst-italic border-bottom">
+        <%= title %>
+      </h3>
+    </div>
+<div class="row mb-2">
+    <% articles.each_with_index do |article, index| %>
+    <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <% if current_user&.id == article.user_id %>
+            <strong>
+                <%= link_to "Edit", edit_article_path(article), class: "d-inline-block mb-2 text-primary text-decoration-none"%>
+                <%= link_to "Destroy", article_path(article), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                    },  class: "text-decoration-none text-danger" %>
+            </strong>
+            <% end %>
+            <h3 class="mb-0"><%= article.title %></h3>
+            <div class="mb-1 text-muted"><%= format_time(article.created_at) %></div>
+            <p class="card-text mb-auto"><%= truncate(article.body, length: 200) %></p>
+            <%= link_to "Continue reading", article, class: "stretched-link"%>
+        </div>
+        </div>
+    </div>
+    <% end %>
+</div>

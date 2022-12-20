@@ -5,7 +5,8 @@
         <ul class="navbar-nav ms-auto">
             <% if user_signed_in?%>
                     <%= button_to "Sign out", destroy_user_session_path, method: :delete, form: {turbolink: false}, class: "mt-1 mx-2" %>
-                </li>
+            <% else %>
+                <%= button_to "Sign in", new_user_session_path, form: {turbolink: false}, class: "mt-1 mx-2" %>
             <% end %>
         </ul>
     </div>

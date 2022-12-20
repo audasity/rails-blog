@@ -1,9 +1,9 @@
 class ArticlesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :public_articles, only: [:index, :show]
 
   def index
-    @current_user_articles = current_user.articles
-    @current_user = current_user.id
+    @current_user_articles = current_user&.articles
   end
 
   def show
@@ -12,10 +12,6 @@ class ArticlesController < ApplicationController
 
   def new
     @article = current_user.articles.build
-  end
-
-  def truncate(string, max)
-    string.length > max ? "#{string[0...max]}..." : string
   end
 
   def create

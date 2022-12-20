@@ -7,10 +7,11 @@
           <div class="col-md-8">
             <article class="blog-post">
               <h2 class="blog-post-title"><%= @article.title %></h2>
-              <p class="blog-post-meta"><%= @article.created_at.strftime("%B %d, %Y") %></p>
+              <p class="blog-post-meta"><%= format_time(@article.created_at) %></p>
               <hr>
               <p><%= @article.body %></p>
               <hr>
+              <%%>
               <%= link_to "Edit", edit_article_path(@article) %>
               <%= link_to "Destroy", article_path(@article), data: {
                           turbo_method: :delete,
@@ -22,10 +23,12 @@
         <!-- Comments displaying -->
         <div class="card mt-4">
           <%= render @article.comments %>
+          <% if current_user.present? %>
           <hr>
           <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
-            <%= render 'comments/form' %>
+            <%= render partial: 'comments/form', locals: {article: @article} %>
           </div>
+          <% end %>
         </div>
       </div>
     </div>
