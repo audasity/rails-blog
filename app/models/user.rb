@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :rememberable, :validatable
   
   has_many :articles, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   accepts_nested_attributes_for :articles
 end
