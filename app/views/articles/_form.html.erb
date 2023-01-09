@@ -21,27 +21,32 @@
 <% end %>
 <!-- :model arugment binds formbulider to model object.
      form scoped to article, form fields populated by values from article -->
-<%= form_with model: article do |form| %>
-  <!-- article[status] -->
-  <div>
-    <%= form.label :status %><br>
-    <!-- select sets default select option, in this case by default is "public" -->
-    <%= form.select :status, ['public', 'private'], selected: 'public' %>
-  </div>
+<div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+  <%= form_with model: article do |form| %>
+    <!-- article[status] -->
+    <p>
+      <%= form.label :status %><br>
+      <!-- select sets default select option, in this case by default is "public" -->
+      <%= form.select :status, ['public', 'private'], selected: 'public' %>
+    </p>
 
-  <!-- article[title] -->
-  <div>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
-  </div>
+    <!-- article[title] -->
+    <div>
+      <%= form.label :title %><br>
+      <%= form.text_field :title %>
+    </div>
 
-  <!-- article[body] -->
-  <div>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %><br>
-  </div>
+    <!-- article[body] -->
+    
+    <div class="d-flex flex-start w-100">
+      <div class="form-outline w-100">
+        <%= form.label(:body, class: "form-label") %><br>
+        <%= form.text_area(:body, class: "form-control", rows: "4", style: "background: #fff;")%>
+      </div>
+    </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+    <div class="float-end mt-2 pt-1">
+      <%= form.submit(class: "btn btn-primary btn-sm") %>
+    </div>
+  <% end %>
+</div>
