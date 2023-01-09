@@ -9,17 +9,7 @@
       </h3>
     </div>
     <!-- sort option for articles -->
-    <div class="dropdown">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-        Date created order
-      </a>
-
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li><a class="dropdown-item" href="#">Ascending order</a></li>
-        <li><a class="dropdown-item" href="#">Descending order</a></li>
-      </ul>
-    </div>
-
+    
     <!-- Users articles -->
     <%= render partial: 'list', locals: {articles: @current_user_articles, title: "My Articles"}%>
   <% end %>

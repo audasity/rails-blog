@@ -1,10 +1,14 @@
 <div class="col-md-8">
-      <h3 class="pb-4 mb-4 mt-4 fst-italic border-bottom">
-        <%= title %>
-      </h3>
-    </div>
+    <h3 class="pb-4 mb-4 mt-4 fst-italic border-bottom">
+    <%= title %>
+    </h3>
+</div>
+
+<%= link_to "Descending order", :sort => "desc"%> </th>
+<%= link_to "Ascending order", :sort => "asc"%> </th>
+
 <div class="row mb-2">
-    <% articles.each_with_index do |article, index| %>
+    <% articles.order(created_at: :asc).each_with_index do |article, index| %>
     <div class="col-md-6">
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
