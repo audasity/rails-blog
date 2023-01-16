@@ -11,8 +11,8 @@
     <!-- sort option for articles -->
     
     <!-- Users articles -->
-    <%= render partial: 'list', locals: {articles: @current_user_articles, title: "My Articles"}%>
+    <%= render partial: 'list', locals: {articles: @current_user_articles, title: "My Articles", users: @users_with_articles}%>
   <% end %>
   <!-- All Users Public Articles -->
-  <%= render partial: 'list', locals: {articles: @public_articles, title: "All Articles"}%>
+  <%= render partial: 'list', locals: {articles: @public_articles, title: "All Articles", users: @users_with_articles}%>
 </main>

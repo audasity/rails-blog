@@ -8,4 +8,6 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   accepts_nested_attributes_for :articles
+
+  scope :users_with_articles, -> { joins(:articles).group('user_id')}
 end

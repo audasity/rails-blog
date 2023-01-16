@@ -1,10 +1,11 @@
 class ArticlesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :public_articles, only: [:index, :show]
+  before_action :users_with_articles, only: [:index]
 
   def index
     @current_user_articles = current_user&.articles.order_by_date params[:sort]
-    @public_articles = @public_articles.order_by_date params[:sort]
+    @public_articles = @public_articles
   end
 
   def show
@@ -51,6 +52,10 @@ class ArticlesController < ApplicationController
   end
 
   def public_articles
-    @public_articles = Article.public_posts
+    @public_articles = Article.public_posts&.order_by_date params[:sort]
+  end
+
+  def users_with_articles
+    @users_with_articles = User.all.users_with_articles
   end
 end

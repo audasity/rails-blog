@@ -4,6 +4,13 @@
     </h3>
 </div>
 
+<% if title == "All Articles"%>
+    <% users.each do |user| %>
+        <%= link_to "#{user.first_name}", :selected_user => user %>
+    <% end %>
+<% end %>
+
+
 <%= link_to "Descending order", :sort => "desc"%> </th>
 <%= link_to "Ascending order", :sort => "asc"%> </th>
 
