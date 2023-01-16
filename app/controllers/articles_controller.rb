@@ -3,15 +3,12 @@ class ArticlesController < ApplicationController
   before_action :public_articles, only: [:index, :show]
 
   def index
-    if params[:sort] != "asc"
-      @current_user_articles = current_user&.articles
-    else
-      @current_user_articles = current_user&.articles.order("created_at #{params[:sort]}")
-    end
+    @current_user_articles = current_user&.articles.reorder("created_at #{params[:sort]}")
+    @public_articles = @public_articles.reorder("created_at #{params[:sort]}")
   end
 
   def show
-    @article = @public_articles.find(params[:id]).order("created_at #{params[:sort]}")
+    @article = @public_articles.find(params[:id])
   end
 
   def new
