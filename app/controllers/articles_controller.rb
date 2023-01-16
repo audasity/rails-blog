@@ -3,8 +3,8 @@ class ArticlesController < ApplicationController
   before_action :public_articles, only: [:index, :show]
 
   def index
-    @current_user_articles = current_user&.articles.reorder("created_at #{params[:sort]}")
-    @public_articles = @public_articles.reorder("created_at #{params[:sort]}")
+    @current_user_articles = current_user&.articles.order_by_date params[:sort]
+    @public_articles = @public_articles.order_by_date params[:sort]
   end
 
   def show

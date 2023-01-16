@@ -10,5 +10,6 @@ class Article < ApplicationRecord
     validates :user_id, presence: true
 
     scope :public_posts, -> { where(status: 'public') }
+    scope :order_by_date, ->(sort = "asc") {reorder("created_at #{sort}")}
   end
   
