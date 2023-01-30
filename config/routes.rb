@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  devise_for :users , :controllers => { registrations: 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
-    root :to => 'devise/sessions#new' 
+    root to: 'devise/sessions#new'
   end
   resources :articles do
     resources :comments
@@ -10,5 +12,4 @@ Rails.application.routes.draw do
   resources :users do
     resources :articles
   end
-
 end

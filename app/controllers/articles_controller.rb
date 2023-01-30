@@ -1,15 +1,21 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :public_articles, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: %i[index show]
+  before_action :public_articles, only: %i[index show]
   before_action :users_with_articles, only: [:index]
 
   def index
-    @current_user_articles = current_user&.articles.order_by_date params[:sort]
-    @public_articles = @public_articles
+    @current_user_articles = current_user&.articles&.order_by_date params[:sort]
   end
 
   def show
-    @article = @public_articles.find(params[:id])
+    @article = current_user&.articles&.find_by(params[:id])
+    @article = if @article.present? && @article.status.eql?('private')
+                 @article_private
+               else
+                 @public_articles.find(params[:id])
+               end
   end
 
   def new
@@ -47,6 +53,7 @@ class ArticlesController < ApplicationController
   end
 
   private
+
   def article_params
     params.require(:article).permit(:title, :body, :status)
   end
@@ -56,6 +63,6 @@ class ArticlesController < ApplicationController
   end
 
   def users_with_articles
-    @users_with_articles = User.all.users_with_articles
+    @users_with_articles = User.users_with_articles
   end
 end
